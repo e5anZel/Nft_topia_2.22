@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Вход | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+    <style>
+
+        body {
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+            font-family: 'Inter', sans-serif;
+
+        }
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+        .auth-card {
+
+            background-color: #16161a;
+
+            border-radius: 16px;
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+        }
+
+        .input-field {
+
+            background-color: #242629;
+
+            border: 1px solid #2a2b32;
+
+            color: #fffffe;
+
+        }
+
+        .input-field:focus {
+
+            border-color: #7f5af0;
+
+            box-shadow: 0 0 0 2px rgba(127, 90, 240, 0.2);
+
+        }
+
+    </style>
+
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="auth-card w-full max-w-md p-8">
+
+        <div class="text-center mb-8">
+
+            <a href="index.html" class="flex items-center justify-center">
+
+                <i class="fas fa-cubes text-3xl text-[#7f5af0] mr-2"></i>
+
+                <span class="text-2xl font-bold">NFTopia Galaxy</span>
+
+            </a>
+
+            <h1 class="text-2xl font-bold mt-4">Вход в аккаунт</h1>
+
+            <p class="text-gray-400 mt-2">Введите свои учетные данные</p>
+
+        </div>
+
+
+
+        <form id="login-form" class="space-y-6">
+
+            <div>
+
+                <label for="email" class="block text-sm font-medium mb-1">Электронная почта</label>
+
+                <input type="email" id="email" class="input-field w-full px-4 py-3 rounded-lg" placeholder="your@email.com" required>
+
+            </div>
+
+
+
+            <div>
+
+                <label for="password" class="block text-sm font-medium mb-1">Пароль</label>
+
+                <input type="password" id="password" class="input-field w-full px-4 py-3 rounded-lg" placeholder="••••••••" required>
+
+                <div class="flex justify-end mt-2">
+
+                    <a href="#" class="text-sm text-[#7f5af0] hover:underline">Забыли пароль?</a>
+
+                </div>
+
+            </div>
+
+
+
+            <button type="submit" class="gradient-bg text-white w-full py-3 rounded-lg font-medium hover:opacity-90 transition-all">
+
+                Войти
+
+            </button>
+
+
+
+            <div class="text-center text-sm text-gray-400">
+
+                Нет аккаунта? <a href="register.html" class="text-[#7f5af0] hover:underline">Зарегистрироваться</a>
+
+            </div>
+
+
+
+            <div class="relative my-6">
+
+                <div class="absolute inset-0 flex items-center">
+
+                    <div class="w-full border-t border-gray-700"></div>
+
+                </div>
+
+                <div class="relative flex justify-center text-sm">
+
+                    <span class="px-2 bg-[#16161a] text-gray-400">Или войти через</span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <button type="button" class="bg-[#242629] text-white py-3 rounded-lg font-medium hover:bg-[#2a2b32] transition-all flex items-center justify-center">
+
+                    <i class="fab fa-google text-[#DB4437] mr-2"></i> Google
+
+                </button>
+
+                <button type="button" class="bg-[#242629] text-white py-3 rounded-lg font-medium hover:bg-[#2a2b32] transition-all flex items-center justify-center">
+
+                    <i class="fab fa-twitter text-[#1DA1F2] mr-2"></i> Twitter
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/notifications.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script>
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            
+
+            const email = document.getElementById('email').value;
+
+            const password = document.getElementById('password').value;
+
+            
+
+            const result = loginUser(email, password);
+
+            
+
+            if (result.success) {
+
+                showNotification('Вход выполнен успешно!', 'success');
+
+                // Обновляем user-menu на всех страницах
+
+                setTimeout(() => {
+
+                    // Обновляем UI авторизации перед редиректом
+
+                    if (typeof updateAuthUI !== 'undefined') {
+
+                        updateAuthUI();
+
+                    }
+
+                    // Перенаправляем на страницу, с которой пришли, или на главную
+
+                    let returnUrl = new URLSearchParams(window.location.search).get('return') || 'index.html';
+
+                    // Предотвращаем редирект обратно на страницу входа
+
+                    if (returnUrl === 'login.html' || returnUrl === 'login' || returnUrl.includes('login')) {
+
+                        returnUrl = 'index.html';
+
+                    }
+
+                    window.location.href = returnUrl;
+
+                }, 1000);
+
+            } else {
+
+                showNotification(result.message, 'error');
+
+            }
+
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>
+

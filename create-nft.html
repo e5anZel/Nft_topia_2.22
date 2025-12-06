@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Создать NFT | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+    <style>
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+        }
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Верхняя полоса -->
+
+    <div class="gradient-bg text-white text-sm py-2 px-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="flex space-x-4">
+
+                <a href="index.html" class="hover:underline">Главная</a>
+
+                <a href="collections.html" class="hover:underline">Топ коллекции</a>
+
+                <a href="auctions.html" class="hover:underline">Аукционы</a>
+
+            </div>
+
+            <div class="flex space-x-4">
+
+                <a href="support.html" class="hover:underline">Поддержка</a>
+
+                <a href="create-nft.html" class="hover:underline">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основное меню -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <a href="index.html" class="flex items-center">
+
+                    <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                    <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                </a>
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <a href="marketplace.html" class="font-medium hover:text-[#7f5af0]">Маркетплейс</a>
+
+                    <a href="statistics.html" class="font-medium hover:text-[#7f5af0]">Статистика</a>
+
+                    <a href="how-to-buy.html" class="font-medium hover:text-[#7f5af0]">Как купить</a>
+
+                    <a href="blog.html" class="font-medium hover:text-[#7f5af0]">Блог</a>
+
+                    <a href="profile.html" class="font-medium hover:text-[#7f5af0]">Профиль</a>
+
+                </nav>
+
+                <div class="flex items-center space-x-4">
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <user-menu></user-menu>
+
+                    <script src="components/user-menu.js"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    
+
+    <!-- Основной контент -->
+
+    <main class="container mx-auto px-4 py-8 max-w-3xl">
+
+        <h1 class="text-3xl font-bold mb-8">Создать NFT</h1>
+
+        
+
+        <div class="bg-[#16161a] rounded-xl p-6">
+
+            <form id="create-nft-form" class="space-y-6">
+
+                <!-- Загрузка изображения -->
+
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">Изображение NFT *</label>
+
+                    <div class="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center">
+
+                        <input type="file" id="nft-image" accept="image/*" class="hidden" required>
+
+                        <div id="image-preview" class="hidden mb-4">
+
+                            <img id="preview-img" src="" alt="Preview" class="max-w-full max-h-64 mx-auto rounded-lg">
+
+                        </div>
+
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-500 mb-4"></i>
+
+                        <p class="text-gray-400 mb-2">Перетащите изображение сюда или нажмите для выбора</p>
+
+                        <button type="button" id="upload-btn" class="bg-[#7f5af0] text-white px-4 py-2 rounded-lg hover:bg-[#6a4ac9]">
+
+                            Выбрать файл
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                
+
+                <!-- Название -->
+
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">Название NFT *</label>
+
+                    <input type="text" id="nft-name" class="w-full bg-[#242629] text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#7f5af0]" required>
+
+                </div>
+
+                
+
+                <!-- Описание -->
+
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">Описание</label>
+
+                    <textarea id="nft-description" rows="4" class="w-full bg-[#242629] text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#7f5af0]"></textarea>
+
+                </div>
+
+                
+
+                <!-- Цена -->
+
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">Цена (ETH) *</label>
+
+                    <input type="number" id="nft-price" step="0.01" min="0" class="w-full bg-[#242629] text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#7f5af0]" required>
+
+                </div>
+
+                
+
+                <!-- Категория -->
+
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">Категория *</label>
+
+                    <select id="nft-category" class="w-full bg-[#242629] text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#7f5af0]" required>
+
+                        <option value="">Выберите категорию</option>
+
+                        <option value="Искусство">Искусство</option>
+
+                        <option value="Коллекционные">Коллекционные</option>
+
+                        <option value="Фотография">Фотография</option>
+
+                        <option value="Музыка">Музыка</option>
+
+                        <option value="Игры">Игры</option>
+
+                    </select>
+
+                </div>
+
+                
+
+                <!-- Кнопки -->
+
+                <div class="flex space-x-4 pt-4">
+
+                    <button type="submit" class="flex-1 bg-[#7f5af0] text-white px-6 py-3 rounded-lg hover:bg-[#6a4ac9] transition-all font-medium">
+
+                        Создать NFT
+
+                    </button>
+
+                    <button type="button" onclick="window.location.href='marketplace.html'" class="flex-1 bg-[#242629] text-white px-6 py-3 rounded-lg hover:bg-[#2a2b32] transition-all font-medium">
+
+                        Отмена
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        
+
+        <div class="mt-6 bg-[#16161a] rounded-xl p-6">
+
+            <h2 class="text-xl font-bold mb-4">Полезная информация</h2>
+
+            <ul class="space-y-2 text-gray-400">
+
+                <li>• Рекомендуемый размер изображения: 1000x1000px или больше</li>
+
+                <li>• Поддерживаемые форматы: JPG, PNG, GIF, WebP</li>
+
+                <li>• Максимальный размер файла: 50MB</li>
+
+                <li>• Комиссия за создание NFT: 0.01 ETH</li>
+
+            </ul>
+
+        </div>
+
+    </main>
+
+    
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/notifications.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script src="js/user-nfts.js"></script>
+
+    <script>
+
+        // Проверка авторизации
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const user = typeof getCurrentUser !== 'undefined' ? getCurrentUser() : null;
+
+            if (!user) {
+
+                if (typeof showNotification !== 'undefined') {
+
+                    showNotification('Необходимо войти в систему для создания NFT', 'error');
+
+                }
+
+                setTimeout(() => {
+
+                    window.location.href = 'login.html?return=create-nft.html';
+
+                }, 2000);
+
+                return;
+
+            }
+
+            
+
+            // Загрузка изображения
+
+            const uploadBtn = document.getElementById('upload-btn');
+
+            const imageInput = document.getElementById('nft-image');
+
+            const imagePreview = document.getElementById('image-preview');
+
+            const previewImg = document.getElementById('preview-img');
+
+            
+
+            uploadBtn.addEventListener('click', () => imageInput.click());
+
+            
+
+            imageInput.addEventListener('change', (e) => {
+
+                const file = e.target.files[0];
+
+                if (file) {
+
+                    const reader = new FileReader();
+
+                    reader.onload = (event) => {
+
+                        previewImg.src = event.target.result;
+
+                        imagePreview.classList.remove('hidden');
+
+                    };
+
+                    reader.readAsDataURL(file);
+
+                }
+
+            });
+
+            
+
+            // Обработка формы
+
+            document.getElementById('create-nft-form').addEventListener('submit', async (e) => {
+
+                e.preventDefault();
+
+                
+
+                // Получаем данные формы
+
+                const imageInput = document.getElementById('nft-image');
+
+                const title = document.getElementById('nft-name').value.trim();
+
+                const description = document.getElementById('nft-description').value.trim();
+
+                const price = document.getElementById('nft-price').value;
+
+                const category = document.getElementById('nft-category').value;
+
+                
+
+                // Проверка изображения
+
+                if (!imageInput.files || imageInput.files.length === 0) {
+
+                    if (typeof showNotification !== 'undefined') {
+
+                        showNotification('Пожалуйста, выберите изображение', 'error');
+
+                    }
+
+                    return;
+
+                }
+
+                
+
+                // Загружаем изображение на сервер
+
+                const file = imageInput.files[0];
+
+                const formData = new FormData();
+
+                formData.append('image', file);
+
+                
+
+                try {
+
+                    if (typeof showNotification !== 'undefined') {
+
+                        showNotification('Загрузка изображения...', 'info');
+
+                    }
+
+                    
+
+                    // Отправляем файл на сервер
+
+                    const uploadResponse = await fetch('/api/upload-image', {
+
+                        method: 'POST',
+
+                        body: formData
+
+                    });
+
+                    
+
+                    if (!uploadResponse.ok) {
+
+                        const errorData = await uploadResponse.json();
+
+                        throw new Error(errorData.error || 'Ошибка при загрузке изображения');
+
+                    }
+
+                    
+
+                    const uploadResult = await uploadResponse.json();
+
+                    const imageUrl = uploadResult.imageUrl;
+
+                    
+
+                    // Подготавливаем данные NFT
+
+                    const nftData = {
+
+                        title: title,
+
+                        description: description,
+
+                        price: price,
+
+                        image: imageUrl,
+
+                        category: category
+
+                    };
+
+                    
+
+                    // Создаем NFT
+
+                    if (typeof showNotification !== 'undefined') {
+
+                        showNotification('Создание NFT...', 'info');
+
+                    }
+
+                    
+
+                    const nft = await UserNftAPI.create(nftData);
+
+                    
+
+                    // Успех!
+
+                    if (typeof showNotification !== 'undefined') {
+
+                        showNotification('NFT успешно создан!', 'success');
+
+                    }
+
+                    
+
+                    // Перенаправляем на профиль через 1.5 секунды
+
+                    setTimeout(() => {
+
+                        window.location.href = 'profile.html';
+
+                    }, 1500);
+
+                    
+
+                } catch (error) {
+
+                    console.error('Error creating NFT:', error);
+
+                    if (typeof showNotification !== 'undefined') {
+
+                        showNotification('Ошибка при создании NFT: ' + error.message, 'error');
+
+                    } else {
+
+                        alert('Ошибка при создании NFT: ' + error.message);
+
+                    }
+
+                }
+
+            });
+
+            
+
+            // Обновление счетчика корзины
+
+            if (typeof updateCartBadge !== 'undefined') {
+
+                updateCartBadge();
+
+            } else if (typeof getCartItemCount !== 'undefined') {
+
+                const badge = document.querySelector('.cart-badge');
+
+                if (badge) {
+
+                    const count = getCartItemCount();
+
+                    if (count > 0) {
+
+                        badge.textContent = count;
+
+                        badge.classList.remove('hidden');
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    <script src="components/user-menu.js"></script>
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Блог | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+        }
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Верхняя полоса -->
+
+    <div class="gradient-bg text-white text-sm py-2 px-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="flex space-x-4">
+
+                <a href="index.html" class="hover:underline">Главная</a>
+
+                <a href="collections.html" class="hover:underline">Топ коллекции</a>
+
+                <a href="auctions.html" class="hover:underline">Аукционы</a>
+
+            </div>
+
+            <div class="flex space-x-4">
+
+                <a href="support.html" class="hover:underline">Поддержка</a>
+
+                <a href="create-nft.html" class="hover:underline">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основное меню -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <a href="index.html" class="flex items-center">
+
+                    <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                    <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                </a>
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <a href="marketplace.html" class="font-medium hover:text-[#7f5af0]">Маркетплейс</a>
+
+                    <a href="statistics.html" class="font-medium hover:text-[#7f5af0]">Статистика</a>
+
+                    <a href="how-to-buy.html" class="font-medium hover:text-[#7f5af0]">Как купить</a>
+
+                    <a href="blog.html" class="font-medium text-[#7f5af0]">Блог</a>
+
+                    <a href="profile.html" class="font-medium hover:text-[#7f5af0]">Профиль</a>
+
+                </nav>
+
+                <div class="flex items-center space-x-4">
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <user-menu></user-menu>
+
+                    <script src="components/user-menu.js"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    
+
+    <!-- Основной контент -->
+
+    <main class="container mx-auto px-4 py-8">
+
+        <h1 class="text-3xl font-bold mb-8">Блог</h1>
+
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Статья 1 -->
+
+            <article class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all">
+
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800" alt="NFT" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+
+                    <span class="text-sm text-[#7f5af0]">15 января 2024</span>
+
+                    <h2 class="text-xl font-bold mt-2 mb-2">Как начать коллекционировать NFT</h2>
+
+                    <p class="text-gray-400 mb-4">Руководство для начинающих коллекционеров NFT. Узнайте, как выбрать первую работу и начать свою коллекцию.</p>
+
+                    <a href="#" class="text-[#7f5af0] hover:underline">Читать далее →</a>
+
+                </div>
+
+            </article>
+
+            
+
+            <!-- Статья 2 -->
+
+            <article class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all">
+
+                <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?w=800" alt="NFT" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+
+                    <span class="text-sm text-[#7f5af0]">10 января 2024</span>
+
+                    <h2 class="text-xl font-bold mt-2 mb-2">Топ-10 NFT коллекций 2024</h2>
+
+                    <p class="text-gray-400 mb-4">Обзор самых популярных и дорогих NFT коллекций этого года. Узнайте, какие проекты набирают обороты.</p>
+
+                    <a href="#" class="text-[#7f5af0] hover:underline">Читать далее →</a>
+
+                </div>
+
+            </article>
+
+            
+
+            <!-- Статья 3 -->
+
+            <article class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all">
+
+                <img src="https://images.unsplash.com/photo-1639322537504-6427a16b5a6b?w=800" alt="NFT" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+
+                    <span class="text-sm text-[#7f5af0]">5 января 2024</span>
+
+                    <h2 class="text-xl font-bold mt-2 mb-2">Безопасность в мире NFT</h2>
+
+                    <p class="text-gray-400 mb-4">Как защитить свои NFT и криптовалюту. Советы по безопасности для коллекционеров и создателей.</p>
+
+                    <a href="#" class="text-[#7f5af0] hover:underline">Читать далее →</a>
+
+                </div>
+
+            </article>
+
+            
+
+            <!-- Статья 4 -->
+
+            <article class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all">
+
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800" alt="NFT" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+
+                    <span class="text-sm text-[#7f5af0]">1 января 2024</span>
+
+                    <h2 class="text-xl font-bold mt-2 mb-2">Создание своего первого NFT</h2>
+
+                    <p class="text-gray-400 mb-4">Пошаговое руководство по созданию и продаже вашего первого NFT. От идеи до продажи.</p>
+
+                    <a href="#" class="text-[#7f5af0] hover:underline">Читать далее →</a>
+
+                </div>
+
+            </article>
+
+            
+
+            <!-- Статья 5 -->
+
+            <article class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all">
+
+                <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?w=800" alt="NFT" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+
+                    <span class="text-sm text-[#7f5af0]">28 декабря 2023</span>
+
+                    <h2 class="text-xl font-bold mt-2 mb-2">Тенденции NFT в 2024 году</h2>
+
+                    <p class="text-gray-400 mb-4">Что ждет рынок NFT в новом году? Прогнозы и тренды от экспертов индустрии.</p>
+
+                    <a href="#" class="text-[#7f5af0] hover:underline">Читать далее →</a>
+
+                </div>
+
+            </article>
+
+            
+
+            <!-- Статья 6 -->
+
+            <article class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all">
+
+                <img src="https://images.unsplash.com/photo-1639322537504-6427a16b5a6b?w=800" alt="NFT" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+
+                    <span class="text-sm text-[#7f5af0]">20 декабря 2023</span>
+
+                    <h2 class="text-xl font-bold mt-2 mb-2">Инвестиции в NFT: за и против</h2>
+
+                    <p class="text-gray-400 mb-4">Анализ инвестиционного потенциала NFT. Риски и возможности для инвесторов.</p>
+
+                    <a href="#" class="text-[#7f5af0] hover:underline">Читать далее →</a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </main>
+
+    
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script>
+
+        // Обновление счетчика корзины
+
+        if (typeof updateCartBadge !== 'undefined') {
+
+            updateCartBadge();
+
+        } else if (typeof getCartItemCount !== 'undefined') {
+
+            const badge = document.querySelector('.cart-badge');
+
+            if (badge) {
+
+                const count = getCartItemCount();
+
+                if (count > 0) {
+
+                    badge.textContent = count;
+
+                    badge.classList.remove('hidden');
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+    <script src="components/user-menu.js"></script>
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NFTopia Galaxy Market - NFT Marketplace | Buy & Sell Digital Art</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+        }
+
+        
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+        .dropdown:hover .dropdown-menu,
+
+        .dropdown-menu:hover {
+
+            display: block;
+
+        }
+
+        
+
+        /* Задержка для выпадающего меню маркетплейса */
+
+        .marketplace-dropdown {
+
+            position: relative;
+
+        }
+
+        
+
+        .marketplace-dropdown .dropdown-menu {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(-10px);
+
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+            pointer-events: none;
+
+        }
+
+        
+
+        .marketplace-dropdown:hover .dropdown-menu,
+
+        .marketplace-dropdown .dropdown-menu:hover {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+
+            display: block;
+
+            pointer-events: auto;
+
+        }
+
+.mobile-menu {
+
+            transform: translateX(100%);
+
+            transition: transform 0.3s ease-in-out;
+
+            background-color: #16161a;
+
+        }
+
+        
+
+        .mobile-menu.active {
+
+            transform: translateX(0);
+
+        }
+
+        
+
+        .card-hover:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 10px 25px rgba(127, 90, 240, 0.3);
+
+            transition: all 0.3s ease;
+
+        }
+
+        
+
+        .transition-all {
+
+            transition: all 0.3s ease;
+
+        }
+
+        
+
+        .nft-card {
+
+            background-color: #242629;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+        }
+
+        
+
+        .nft-card-image {
+
+            height: 250px;
+
+            object-fit: cover;
+
+            width: 100%;
+
+        }
+
+        
+
+        .creator-avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            border: 2px solid #7f5af0;
+
+        }
+
+        
+
+        .price-tag {
+
+            background-color: #7f5af0;
+
+            color: white;
+
+            padding: 4px 8px;
+
+            border-radius: 6px;
+
+            font-weight: 600;
+
+        }
+
+        
+
+        .category-tag {
+
+            background-color: #2cb67d;
+
+            color: white;
+
+            padding: 4px 8px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+        }
+
+
+
+        .popular-carousel-wrapper {
+
+            overflow: hidden;
+
+        }
+
+
+
+        .popular-carousel-track {
+
+            display: flex;
+
+        }
+
+
+
+        .popular-carousel-track .nft-card {
+
+            flex: 0 0 calc((100% - 4.5rem) / 4);
+
+        }
+
+
+
+        @media (max-width: 1023px) {
+
+            .popular-carousel-track .nft-card {
+
+                flex: 0 0 calc((100% - 1.5rem) / 2);
+
+            }
+
+        }
+
+
+
+        @media (max-width: 639px) {
+
+            .popular-carousel-track .nft-card {
+
+                flex: 0 0 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Верхняя полоса -->
+
+    <div class="gradient-bg text-white text-sm py-2 px-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="flex space-x-4">
+
+                <a href="index.html" class="hover:underline">Главная</a>
+
+                <a href="collections.html" class="hover:underline">Топ коллекции</a>
+
+                <a href="auctions.html" class="hover:underline">Аукционы</a>
+
+            </div>
+
+            <div class="flex space-x-4">
+
+                <a href="support.html" class="hover:underline">Поддержка</a>
+
+                <a href="create-nft.html" class="hover:underline">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основное меню -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <!-- Логотип -->
+
+                <div class="flex items-center">
+
+                    <a href="index.html" class="flex items-center">
+
+                        <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                        <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                    </a>
+
+                </div>
+
+                
+
+                <!-- Основное меню -->
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <div class="dropdown relative marketplace-dropdown">
+
+                        <button class="font-medium hover:text-[#7f5af0] flex items-center">
+
+                            Маркетплейс <i class="fas fa-chevron-down ml-1 text-xs"></i>
+
+                        </button>
+
+                        <div class="dropdown-menu absolute hidden bg-[#242629] shadow-lg rounded-md mt-2 py-2 w-64" 
+
+                             style="transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;">
+
+                            <a href="marketplace.html" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">Все NFT</a>
+
+                            <a href="marketplace.html?category=Искусство" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">Искусство</a>
+
+                            <a href="marketplace.html?category=Коллекционные" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">Коллекционные</a>
+
+                            <a href="marketplace.html?category=Фотография" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">Фотография</a>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="dropdown relative">
+
+                        <button class="font-medium hover:text-[#7f5af0] flex items-center">
+
+                            Статистика <i class="fas fa-chevron-down ml-1 text-xs"></i>
+
+                        </button>
+
+                        <div class="dropdown-menu absolute hidden bg-[#242629] shadow-lg rounded-md mt-2 py-2 w-64">
+
+                            <a href="statistics.html" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">Рейтинг NFT</a>
+
+                            <a href="statistics.html#authors" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">Топ авторы</a>
+
+                            <a href="statistics.html#sales" class="block px-4 py-2 hover:bg-[#2cb67d] hover:text-white">История продаж</a>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <a href="how-to-buy.html" class="font-medium hover:text-[#7f5af0]">Как купить</a>
+
+                    <a href="blog.html" class="font-medium hover:text-[#7f5af0]">Блог</a>
+
+                    <a href="profile.html" class="font-medium hover:text-[#7f5af0]">Профиль</a>
+
+</nav>
+
+                
+
+                <!-- Кнопки входа и меню -->
+
+                <div class="flex items-center space-x-4">
+
+                    <button class="search-button hidden md:flex items-center space-x-1 text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-search"></i>
+
+                    </button>
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <div id="auth-buttons" class="hidden md:flex items-center space-x-2" style="display: none;">
+
+                        <a href="login.html" class="bg-[#7f5af0] text-white px-4 py-2 rounded-md hover:bg-[#6a4ac9] transition-all">
+
+                            Войти
+
+                        </a>
+
+                        <a href="register.html" class="bg-transparent border border-[#7f5af0] text-[#7f5af0] px-4 py-2 rounded-md hover:bg-[#7f5af0] hover:text-white transition-all">
+
+                            Регистрация
+
+                        </a>
+
+                    </div>
+
+                    <div id="user-menu-container" style="display: none;">
+
+                        <user-menu></user-menu>
+
+                        <script src="components/user-menu.js"></script>
+
+                    </div>
+
+                    <button id="mobile-menu-button" class="md:hidden text-gray-300">
+
+                        <i class="fas fa-bars text-xl"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    
+
+    <!-- Мобильное меню -->
+
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-80 shadow-lg z-50 p-4 overflow-y-auto">
+
+        <div class="flex justify-between items-center mb-6">
+
+            <a href="index.html" class="flex items-center">
+
+                <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+            </a>
+
+            <button id="close-mobile-menu" class="text-gray-300">
+
+                <i class="fas fa-times text-xl"></i>
+
+            </button>
+
+        </div>
+
+        
+
+        <div class="space-y-4">
+
+            <div class="border-b border-gray-700 pb-4">
+
+                <a href="marketplace.html" class="block py-2 font-medium">Маркетплейс</a>
+
+                <a href="statistics.html" class="block py-2 font-medium">Статистика</a>
+
+                <a href="how-to-buy.html" class="block py-2 font-medium">Как купить</a>
+
+                <a href="blog.html" class="block py-2 font-medium">Блог</a>
+
+                <a href="about.html" class="block py-2 font-medium">О нас</a>
+
+            </div>
+
+            
+
+            <div class="border-b border-gray-700 pb-4">
+
+                <a href="index.html" class="block py-2 text-gray-400">Главная</a>
+
+                <a href="collections.html" class="block py-2 text-gray-400">Топ коллекции</a>
+
+                <a href="auctions.html" class="block py-2 text-gray-400">Аукционы</a>
+
+            </div>
+
+            
+
+            <div>
+
+                <a href="register.html" class="w-full bg-[#7f5af0] text-white px-4 py-3 rounded-md font-medium hover:bg-[#6a4ac9] mb-4 text-center block">
+
+                    Зарегистрироваться
+
+                </a>
+
+<a href="support.html" class="block py-2 text-gray-400">Поддержка</a>
+
+                <a href="create-nft.html" class="block py-2 text-gray-400">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основной контент -->
+
+    <main>
+
+        <!-- Герой-баннер -->
+
+        <section class="gradient-bg py-12 md:py-20">
+
+            <div class="container mx-auto px-4">
+
+                <div class="flex flex-col md:flex-row items-center">
+
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4">Откройте мир цифрового искусства</h1>
+
+                        <p class="text-lg mb-6">Коллекционируйте и продавайте эксклюзивные NFT от лучших художников и создателей</p>
+
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+
+                            <a href="marketplace.html" class="bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition-all text-center">
+
+                                Исследовать
+
+                            </a>
+
+                            <button id="create-nft-btn" class="bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-all">
+
+                                Создать NFT
+
+                            </button>
+
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-4">
+
+                            <div>
+
+                                <div class="text-2xl font-bold">250K+</div>
+
+                                <div class="text-sm">NFT в продаже</div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="text-2xl font-bold">50K+</div>
+
+                                <div class="text-sm">Авторов</div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="text-2xl font-bold">$120M+</div>
+
+                                <div class="text-sm">Объем торгов</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="md:w-1/2 flex justify-center">
+
+                        <div class="relative">
+
+                            <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="NFT Art" class="w-full max-w-md rounded-xl shadow-xl">
+
+                            <div class="absolute -bottom-4 -right-4 bg-[#242629] p-4 rounded-xl shadow-lg w-40">
+
+                                <div class="text-xs text-gray-400 mb-1">Топ продажа</div>
+
+                                <div class="font-bold">Digital Dreams</div>
+
+                                <div class="text-sm text-[#7f5af0]">2.4 ETH</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Категории -->
+
+        <section class="py-12 bg-[#16161a]">
+
+            <div class="container mx-auto px-4">
+
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Популярные категории</h2>
+
+                
+
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+                    <a href="marketplace.html" class="bg-[#242629] p-4 rounded-lg text-center hover:bg-[#7f5af0] transition-all">
+
+                        <div class="bg-[#7f5af0] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+
+                            <i class="fas fa-paint-brush text-xl"></i>
+
+                        </div>
+
+                        <div>Искусство</div>
+
+                    </a>
+
+                    
+
+                    <a href="marketplace.html" class="bg-[#242629] p-4 rounded-lg text-center hover:bg-[#7f5af0] transition-all">
+
+                        <div class="bg-[#7f5af0] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+
+                            <i class="fas fa-camera text-xl"></i>
+
+                        </div>
+
+                        <div>Фотография</div>
+
+                    </a>
+
+                    
+
+                    <a href="marketplace.html" class="bg-[#242629] p-4 rounded-lg text-center hover:bg-[#7f5af0] transition-all">
+
+                        <div class="bg-[#7f5af0] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+
+                            <i class="fas fa-gamepad text-xl"></i>
+
+                        </div>
+
+                        <div>Игровые</div>
+
+                    </a>
+
+                    
+
+                    <a href="marketplace.html" class="bg-[#242629] p-4 rounded-lg text-center hover:bg-[#7f5af0] transition-all">
+
+                        <div class="bg-[#7f5af0] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+
+                            <i class="fas fa-music text-xl"></i>
+
+                        </div>
+
+                        <div>Музыка</div>
+
+                    </a>
+
+                    
+
+                    <a href="marketplace.html" class="bg-[#242629] p-4 rounded-lg text-center hover:bg-[#7f5af0] transition-all">
+
+                        <div class="bg-[#7f5af0] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+
+                            <i class="fas fa-video text-xl"></i>
+
+                        </div>
+
+                        <div>Видео</div>
+
+                    </a>
+
+                    
+
+                    <a href="marketplace.html" class="bg-[#242629] p-4 rounded-lg text-center hover:bg-[#7f5af0] transition-all">
+
+                        <div class="bg-[#7f5af0] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+
+                            <i class="fas fa-tshirt text-xl"></i>
+
+                        </div>
+
+                        <div>Мемы</div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Популярные NFT -->
+
+        <section class="py-12 bg-[#0f0e17]">
+
+            <div class="container mx-auto px-4">
+
+                <div class="flex justify-between items-center mb-8">
+
+                    <h2 class="text-2xl md:text-3xl font-bold">Популярные NFT</h2>
+
+                    <a href="marketplace.html" class="text-[#7f5af0] hover:underline">Смотреть все →</a>
+
+                </div>
+
+                
+
+                <div class="popular-carousel-wrapper">
+
+                    <div id="popular-nfts-track" class="popular-carousel-track gap-6 transition-transform duration-700 ease-out">
+
+                        <!-- NFT карточки будут загружены динамически -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Как это работает -->
+
+        <section class="py-12 bg-[#16161a]">
+
+            <div class="container mx-auto px-4">
+
+                <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center">Как это работает</h2>
+
+                
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <div class="text-center">
+
+                        <div class="bg-[#7f5af0] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">1</div>
+
+                        <h3 class="font-bold text-xl mb-3">Создайте кошелек</h3>
+
+                        <p class="text-gray-400">Подключите криптокошелек (MetaMask, Trust Wallet и др.) к нашей платформе</p>
+
+                    </div>
+
+                    
+
+                    <div class="text-center">
+
+                        <div class="bg-[#7f5af0] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">2</div>
+
+                        <h3 class="font-bold text-xl mb-3">Найдите NFT</h3>
+
+                        <p class="text-gray-400">Исследуйте тысячи уникальных цифровых активов в различных категориях</p>
+
+                    </div>
+
+                    
+
+                    <div class="text-center">
+
+                        <div class="bg-[#7f5af0] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">3</div>
+
+                        <h3 class="font-bold text-xl mb-3">Совершите покупку</h3>
+
+                        <p class="text-gray-400">Приобретите понравившийся NFT с помощью криптовалюты и станьте его владельцем</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Топ коллекции -->
+
+        <section class="py-12 bg-[#0f0e17]">
+
+            <div class="container mx-auto px-4">
+
+                <div class="flex justify-between items-center mb-8">
+
+                    <h2 class="text-2xl md:text-3xl font-bold">Топ коллекции</h2>
+
+                    <a href="marketplace.html" class="text-[#7f5af0] hover:underline">Смотреть все →</a>
+
+                </div>
+
+                
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Коллекция 1 -->
+
+                    <div class="bg-[#16161a] rounded-xl overflow-hidden card-hover transition-all">
+
+                        <div class="relative">
+
+                            <img src="https://images.unsplash.com/photo-1639762681558-3f073a7b3f0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Collection" class="w-full h-48 object-cover">
+
+                            <div class="absolute -bottom-6 left-4">
+
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Creator" class="w-12 h-12 rounded-full border-4 border-[#16161a]">
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-6 pt-8">
+
+                            <div class="flex justify-between items-start mb-3">
+
+                                <div>
+
+                                    <h3 class="font-bold text-lg">Digital Universe</h3>
+
+                                    <div class="text-sm text-gray-400">by @digitalartist</div>
+
+                                </div>
+
+                                <span class="category-tag">1,240 NFT</span>
+
+                            </div>
+
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-800">
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Объем торгов</div>
+
+                                    <div class="text-sm font-medium">540 ETH</div>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Владельцы</div>
+
+                                    <div class="text-sm font-medium">892</div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <!-- Коллекция 2 -->
+
+                    <div class="bg-[#16161a] rounded-xl overflow-hidden card-hover transition-all">
+
+                        <div class="relative">
+
+                            <img src="https://images.unsplash.com/photo-1639762681481-24c2b4b7d42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Collection" class="w-full h-48 object-cover">
+
+                            <div class="absolute -bottom-6 left-4">
+
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Creator" class="w-12 h-12 rounded-full border-4 border-[#16161a]">
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-6 pt-8">
+
+                            <div class="flex justify-between items-start mb-3">
+
+                                <div>
+
+                                    <h3 class="font-bold text-lg">Abstract World</h3>
+
+                                    <div class="text-sm text-gray-400">by @abstractcreator</div>
+
+                                </div>
+
+                                <span class="category-tag">890 NFT</span>
+
+                            </div>
+
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-800">
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Объем торгов</div>
+
+                                    <div class="text-sm font-medium">320 ETH</div>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Владельцы</div>
+
+                                    <div class="text-sm font-medium">456</div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <!-- Коллекция 3 -->
+
+                    <div class="bg-[#16161a] rounded-xl overflow-hidden card-hover transition-all">
+
+                        <div class="relative">
+
+                            <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Collection" class="w-full h-48 object-cover">
+
+                            <div class="absolute -bottom-6 left-4">
+
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Creator" class="w-12 h-12 rounded-full border-4 border-[#16161a]">
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-6 pt-8">
+
+                            <div class="flex justify-between items-start mb-3">
+
+                                <div>
+
+                                    <h3 class="font-bold text-lg">Pixel Dreams</h3>
+
+                                    <div class="text-sm text-gray-400">by @pixelmaster</div>
+
+                                </div>
+
+                                <span class="category-tag">1,540 NFT</span>
+
+                            </div>
+
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-800">
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Объем торгов</div>
+
+                                    <div class="text-sm font-medium">780 ETH</div>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Владельцы</div>
+
+                                    <div class="text-sm font-medium">1,024</div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+        <!-- Призыв к действию -->
+
+        <section class="py-16 gradient-bg">
+
+            <div class="container mx-auto px-4 text-center">
+
+                <h2 class="text-2xl md:text-4xl font-bold mb-6">Начните собирать NFT уже сегодня</h2>
+
+                <p class="text-lg mb-8 max-w-2xl mx-auto">Присоединяйтесь к миллионам пользователей, которые уже открыли для себя мир цифрового искусства и коллекционирования</p>
+
+                <button onclick="if(typeof showNotification !== 'undefined') { showNotification('Функция подключения кошелька будет доступна в ближайшее время', 'info'); } else { alert('Функция подключения кошелька будет доступна в ближайшее время'); }" class="bg-black text-white px-8 py-4 rounded-md font-medium hover:bg-gray-900 transition-all text-lg">
+
+                    Подключить кошелек
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    
+
+    <!-- Футер -->
+
+    <footer class="bg-[#16161a] text-white py-12">
+
+        <div class="container mx-auto px-4">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+                <!-- Колонка 1 -->
+
+                <div>
+
+                    <div class="flex items-center mb-4">
+
+                        <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                        <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                    </div>
+
+                    <p class="text-gray-400 mb-4">Крупнейший маркетплейс цифрового искусства и коллекционных NFT</p>
+
+                    <div class="flex space-x-4">
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-twitter"></i></a>
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-discord"></i></a>
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-instagram"></i></a>
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-telegram"></i></a>
+
+                    </div>
+
+                </div>
+
+                
+
+                <!-- Колонка 2 -->
+
+                <div>
+
+                    <h3 class="font-bold text-lg mb-4">Маркетплейс</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="marketplace.html" class="text-gray-400 hover:text-white">Все NFT</a></li>
+
+                        <li><a href="marketplace.html?category=Искусство" class="text-gray-400 hover:text-white">Искусство</a></li>
+
+                        <li><a href="marketplace.html?category=Коллекционные" class="text-gray-400 hover:text-white">Коллекционные</a></li>
+
+                        <li><a href="marketplace.html?category=Фотография" class="text-gray-400 hover:text-white">Фотография</a></li>
+
+                        <li><a href="marketplace.html?category=Музыка" class="text-gray-400 hover:text-white">Музыка</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Колонка 3 -->
+
+                <div>
+
+                    <h3 class="font-bold text-lg mb-4">Моя учетная запись</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white">Профиль</a></li>
+
+                        <li><a href="my-collections.html" class="text-gray-400 hover:text-white">Мои коллекции</a></li>
+
+                        <li><a href="settings.html" class="text-gray-400 hover:text-white">Настройки</a></li>
+
+                        <li><a href="#" class="text-gray-400 hover:text-white" onclick="if(typeof logoutUser !== 'undefined') { logoutUser(); window.location.href='index.html'; }">Выход</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Колонка 4 -->
+
+                <div>
+
+                    <h3 class="font-bold text-lg mb-4">Ресурсы</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="support.html" class="text-gray-400 hover:text-white">Помощь</a></li>
+
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Блог</a></li>
+
+                        <li><a href="documentation.html" class="text-gray-400 hover:text-white">Документация</a></li>
+
+                        <li><a href="news.html" class="text-gray-400 hover:text-white">Новости</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+
+                <div class="mb-4 md:mb-0">
+
+                    <p class="text-gray-400 text-sm">© 2023 NFTopia Galaxy Market. Все права защищены.</p>
+
+                </div>
+
+                <div class="flex space-x-4">
+
+                    <a href="terms.html" class="text-gray-400 hover:text-white text-sm">Условия использования</a>
+
+                    <a href="privacy.html" class="text-gray-400 hover:text-white text-sm">Политика конфиденциальности</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    
+
+    <script>
+
+        // Мобильное меню
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        
+
+        mobileMenuButton.addEventListener('click', () => {
+
+            mobileMenu.classList.add('active');
+
+            document.body.style.overflow = 'hidden';
+
+        });
+
+        
+
+        closeMobileMenu.addEventListener('click', () => {
+
+            mobileMenu.classList.remove('active');
+
+            document.body.style.overflow = '';
+
+        });
+
+        
+
+        // Закрытие меню при клике вне его
+
+        document.addEventListener('click', (e) => {
+
+            if (!mobileMenu.contains(e.target) && e.target !== mobileMenuButton) {
+
+                mobileMenu.classList.remove('active');
+
+                document.body.style.overflow = '';
+
+            }
+
+        });
+
+        
+
+        // Плавный скролл для якорей
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+
+                    behavior: 'smooth'
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+    <script src="js/nft-data.js"></script>
+
+    <script src="js/nft-cards.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/notifications.js"></script>
+
+    <script src="js/common.js"></script>
+
+    <script src="js/dropdown-menu.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script>
+
+        function initPopularCarousel(allNfts) {
+
+            const track = document.getElementById('popular-nfts-track');
+
+            if (!track || !allNfts || !allNfts.length) return;
+
+
+
+            const VISIBLE_COUNT = Math.min(4, allNfts.length);
+
+            if (allNfts.length <= VISIBLE_COUNT) {
+
+                loadNftCards('popular-nfts-track', allNfts.slice(0, VISIBLE_COUNT), 'index');
+
+                return;
+
+            }
+
+
+
+            let currentIndex = VISIBLE_COUNT;
+
+            const total = allNfts.length;
+
+
+
+            const appendNftCard = (nft) => {
+
+                const card = createNftCard(nft, 'index');
+
+                track.appendChild(card);
+
+            };
+
+
+
+            for (let i = 0; i < VISIBLE_COUNT; i++) {
+
+                appendNftCard(allNfts[i]);
+
+            }
+
+
+
+            const getGapValue = () => {
+
+                const style = getComputedStyle(track);
+
+                const gap = style.columnGap || style.gap || '24px';
+
+                return parseFloat(gap);
+
+            };
+
+
+
+            let isAnimating = false;
+
+
+
+            const runCarousel = () => {
+
+                if (isAnimating || !track.firstElementChild) return;
+
+                isAnimating = true;
+
+
+
+                const nextNft = allNfts[currentIndex % total];
+
+                currentIndex += 1;
+
+
+
+                appendNftCard(nextNft);
+
+
+
+                const firstCard = track.firstElementChild;
+
+                const cardWidth = firstCard.getBoundingClientRect().width;
+
+                const shift = cardWidth + getGapValue();
+
+
+
+                requestAnimationFrame(() => {
+
+                    track.style.transition = 'transform 0.7s ease';
+
+                    track.style.transform = `translateX(-${shift}px)`;
+
+                });
+
+
+
+                const handleTransitionEnd = () => {
+
+                    track.style.transition = 'none';
+
+                    track.removeEventListener('transitionend', handleTransitionEnd);
+
+                    if (track.firstElementChild) {
+
+                        track.removeChild(track.firstElementChild);
+
+                    }
+
+
+
+                    requestAnimationFrame(() => {
+
+                        track.style.transform = 'translateX(0)';
+
+
+
+                        requestAnimationFrame(() => {
+
+                            track.style.transition = '';
+
+                            isAnimating = false;
+
+                        });
+
+                    });
+
+                };
+
+
+
+                track.addEventListener('transitionend', handleTransitionEnd, { once: true });
+
+            };
+
+
+
+            setInterval(runCarousel, 3500);
+
+        }
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const allNfts = getAllNfts();
+
+            initPopularCarousel(allNfts);
+
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>
+

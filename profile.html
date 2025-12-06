@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Профиль | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+    <style>
+
+        body {
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+            font-family: 'Inter', sans-serif;
+
+        }
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+        .profile-header {
+
+            background-color: #16161a;
+
+            border-radius: 16px;
+
+        }
+
+        .nft-card {
+
+            background-color: #242629;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            transition: all 0.3s ease;
+
+        }
+
+        .nft-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 10px 25px rgba(127, 90, 240, 0.3);
+
+        }
+
+        .nft-image {
+
+            height: 200px;
+
+            object-fit: cover;
+
+            width: 100%;
+
+        }
+
+        .creator-avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            border: 2px solid #7f5af0;
+
+        }
+
+        .price-tag {
+
+            background-color: #7f5af0;
+
+            color: white;
+
+            padding: 4px 8px;
+
+            border-radius: 6px;
+
+            font-weight: 600;
+
+        }
+
+        .tab-button {
+
+            border-bottom: 2px solid transparent;
+
+            padding-bottom: 0.5rem;
+
+            transition: all 0.2s ease;
+
+        }
+
+        .tab-button.active {
+
+            border-bottom-color: #7f5af0;
+
+            color: #7f5af0;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Навбар -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <!-- Логотип -->
+
+                <div class="flex items-center">
+
+                    <a href="index.html" class="flex items-center">
+
+                        <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                        <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                    </a>
+
+                </div>
+
+                
+
+                <!-- Основное меню -->
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <a href="marketplace.html" class="font-medium hover:text-[#7f5af0]">Маркетплейс</a>
+
+                    <a href="statistics.html" class="font-medium hover:text-[#7f5af0]">Статистика</a>
+
+                    <a href="blog.html" class="font-medium hover:text-[#7f5af0]">Блог</a>
+
+                </nav>
+
+                
+
+                <!-- Кнопки -->
+
+                <div class="flex items-center space-x-4">
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <user-menu></user-menu>
+
+                    <script src="components/user-menu.js"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- Основной контент -->
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Шапка профиля -->
+
+        <div class="profile-header p-6 mb-8">
+
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+
+                <div class="relative">
+
+                    <div id="profile-avatar" class="w-32 h-32 rounded-full border-4 border-[#7f5af0] flex items-center justify-center text-white text-4xl font-bold" style="background: #7f5af0;"></div>
+
+                    <div class="absolute bottom-0 right-0 bg-[#7f5af0] text-white rounded-full p-2 cursor-pointer hover:bg-[#6a4ac9]">
+
+                        <i class="fas fa-camera"></i>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="flex-1 text-center md:text-left">
+
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+
+                        <div>
+
+                            <h1 id="profile-name" class="text-2xl font-bold">Загрузка...</h1>
+
+                            <p id="profile-username" class="text-gray-400">@username</p>
+
+                        </div>
+
+                        <button id="edit-profile-btn" class="gradient-bg text-white px-6 py-2 rounded-md font-medium hover:opacity-90 mt-4 md:mt-0">
+
+                            <i class="fas fa-pen mr-2"></i> Редактировать
+
+                        </button>
+
+                    </div>
+
+                    
+
+                    <p id="profile-description" class="text-gray-300 mb-4">Загрузка описания...</p>
+
+                    
+
+                    <div class="flex flex-wrap justify-center md:justify-start gap-6">
+
+                        <div class="text-center">
+
+                            <div id="profile-nft-count" class="text-xl font-bold">0</div>
+
+                            <div class="text-gray-400 text-sm">NFT</div>
+
+                        </div>
+
+                        <div class="text-center">
+
+                            <div id="profile-collections" class="text-xl font-bold">0</div>
+
+                            <div class="text-gray-400 text-sm">Коллекции</div>
+
+                        </div>
+
+                        <div class="text-center">
+
+                            <div id="profile-followers" class="text-xl font-bold">0</div>
+
+                            <div class="text-gray-400 text-sm">Подписчики</div>
+
+                        </div>
+
+                        <div class="text-center">
+
+                            <div id="profile-sales" class="text-xl font-bold">0 ETH</div>
+
+                            <div class="text-gray-400 text-sm">Объем продаж</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Табы -->
+
+        <div class="flex border-b border-gray-800 mb-8">
+
+            <button class="tab-button active mr-6 font-medium">Мои NFT</button>
+
+            <button class="tab-button mr-6 font-medium">Коллекции</button>
+
+            <button class="tab-button mr-6 font-medium">Лайки</button>
+
+            <button class="tab-button font-medium">Активность</button>
+
+        </div>
+
+
+
+        <!-- NFT коллекция -->
+
+        <div id="profile-nfts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <!-- NFT карточки будут загружены динамически -->
+
+        </div>
+
+
+
+    </main>
+
+
+
+    <!-- Футер -->
+
+    <footer class="bg-[#16161a] text-white py-12 mt-16">
+
+        <div class="container mx-auto px-4">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+                <div>
+
+                    <div class="flex items-center mb-4">
+
+                        <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                        <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                    </div>
+
+                    <p class="text-gray-400 mb-4">Крупнейший маркетплейс цифрового искусства и коллекционных NFT</p>
+
+                    <div class="flex space-x-4">
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-twitter"></i></a>
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-discord"></i></a>
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-instagram"></i></a>
+
+                        <a href="#" class="text-gray-400 hover:text-[#7f5af0]"><i class="fab fa-telegram"></i></a>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div>
+
+                    <h3 class="font-bold text-lg mb-4">Маркетплейс</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="#" class="text-gray-400 hover:text-white">Все NFT</a></li>
+
+                        <li><a href="#" class="text-gray-400 hover:text-white">Искусство</a></li>
+
+                        <li><a href="#" class="text-gray-400 hover:text-white">Коллекционные</a></li>
+
+                        <li><a href="#" class="text-gray-400 hover:text-white">Фотография</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div>
+
+                    <h3 class="font-bold text-lg mb-4">Моя учетная запись</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white">Профиль</a></li>
+
+                        <li><a href="my-collections.html" class="text-gray-400 hover:text-white">Мои коллекции</a></li>
+
+                        <li><a href="settings.html" class="text-gray-400 hover:text-white">Настройки</a></li>
+
+                        <li><a href="#" class="text-gray-400 hover:text-white" onclick="if(typeof logoutUser !== 'undefined') { logoutUser(); window.location.href='index.html'; }">Выйти</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div>
+
+                    <h3 class="font-bold text-lg mb-4">Ресурсы</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="support.html" class="text-gray-400 hover:text-white">Помощь</a></li>
+
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Блог</a></li>
+
+                        <li><a href="documentation.html" class="text-gray-400 hover:text-white">Документация</a></li>
+
+                        <li><a href="news.html" class="text-gray-400 hover:text-white">Новости</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+
+                <div class="mb-4 md:mb-0">
+
+                    <p class="text-gray-400 text-sm">© 2023 NFTopia Galaxy Market. Все права защищены.</p>
+
+                </div>
+
+                <div class="flex space-x-4">
+
+                    <a href="terms.html" class="text-gray-400 hover:text-white text-sm">Условия использования</a>
+
+                    <a href="privacy.html" class="text-gray-400 hover:text-white text-sm">Политика конфиденциальности</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="js/nft-data.js"></script>
+
+    <script src="js/user-nfts.js"></script>
+
+    <script src="js/nft-cards.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/notifications.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script src="js/profile-edit.js"></script>
+
+    <script>
+
+        // Загрузка данных профиля
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const user = getCurrentUser();
+
+            
+
+            if (user) {
+
+                // Заполняем данные профиля
+
+                document.getElementById('profile-name').textContent = user.fullName || user.username;
+
+                document.getElementById('profile-username').textContent = '@' + user.username;
+
+                
+
+                // Устанавливаем аватар (инициалы или загруженное фото)
+
+                const avatarElement = document.getElementById('profile-avatar');
+
+                if (user.avatar && user.avatarType === 'image') {
+
+                    avatarElement.style.backgroundImage = `url(${user.avatar})`;
+
+                    avatarElement.style.backgroundSize = 'cover';
+
+                    avatarElement.style.backgroundPosition = 'center';
+
+                    avatarElement.textContent = '';
+
+                } else {
+
+                    avatarElement.style.background = generateColorFromString(user.username);
+
+                    avatarElement.textContent = getInitials(user.username);
+
+                }
+
+                
+
+                document.getElementById('profile-description').textContent = user.description || 'Пользователь NFT маркетплейса';
+
+                
+
+                // Подсчитываем статистику
+
+                const purchases = user.purchases || [];
+
+                const totalSales = purchases.reduce((sum, p) => sum + p.price, 0);
+
+                const nftCount = purchases.length;
+
+                
+
+                document.getElementById('profile-nft-count').textContent = nftCount;
+
+                document.getElementById('profile-sales').textContent = totalSales.toFixed(2) + ' ETH';
+
+            } else {
+
+                // Если пользователь не авторизован, перенаправляем на вход
+
+                window.location.href = 'login.html?return=profile.html';
+
+            }
+
+            
+
+            // NFT загружаются через profile-tabs.js
+
+            
+
+            // Инициализация редактирования
+
+            const editBtn = document.getElementById('edit-profile-btn');
+
+            if (editBtn) {
+
+                editBtn.addEventListener('click', () => {
+
+                    if (typeof openEditModal !== 'undefined') {
+
+                        openEditModal();
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+    <script src="js/profile-edit.js"></script>
+
+    <script src="js/profile-tabs.js"></script>
+
+    <script src="components/user-menu.js"></script>
+
+
+
+</body>
+
+</html>
+

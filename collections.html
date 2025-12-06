@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Топ коллекции | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+        }
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Верхняя полоса -->
+
+    <div class="gradient-bg text-white text-sm py-2 px-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="flex space-x-4">
+
+                <a href="index.html" class="hover:underline">Главная</a>
+
+                <a href="collections.html" class="hover:underline">Топ коллекции</a>
+
+                <a href="auctions.html" class="hover:underline">Аукционы</a>
+
+            </div>
+
+            <div class="flex space-x-4">
+
+                <a href="support.html" class="hover:underline">Поддержка</a>
+
+                <a href="create-nft.html" class="hover:underline">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основное меню -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <a href="index.html" class="flex items-center">
+
+                    <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                    <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                </a>
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <a href="marketplace.html" class="font-medium hover:text-[#7f5af0]">Маркетплейс</a>
+
+                    <a href="statistics.html" class="font-medium hover:text-[#7f5af0]">Статистика</a>
+
+                    <a href="how-to-buy.html" class="font-medium hover:text-[#7f5af0]">Как купить</a>
+
+                    <a href="blog.html" class="font-medium hover:text-[#7f5af0]">Блог</a>
+
+                    <a href="profile.html" class="font-medium hover:text-[#7f5af0]">Профиль</a>
+
+                </nav>
+
+                <div class="flex items-center space-x-4">
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <user-menu></user-menu>
+
+                    <script src="components/user-menu.js"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    
+
+    <!-- Основной контент -->
+
+    <main class="container mx-auto px-4 py-8">
+
+        <h1 class="text-3xl font-bold mb-8">Топ коллекции</h1>
+
+        
+
+        <div id="collections-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Заполнится динамически -->
+
+        </div>
+
+    </main>
+
+    
+
+    <script src="js/nft-data.js"></script>
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const allNfts = getAllNfts();
+
+            const collectionsMap = {};
+
+            
+
+            // Группируем NFT по коллекциям
+
+            allNfts.forEach(nft => {
+
+                const collectionName = nft.collection || 'Без коллекции';
+
+                if (!collectionsMap[collectionName]) {
+
+                    collectionsMap[collectionName] = {
+
+                        name: collectionName,
+
+                        nfts: [],
+
+                        totalVolume: 0,
+
+                        ownerCount: new Set()
+
+                    };
+
+                }
+
+                collectionsMap[collectionName].nfts.push(nft);
+
+                collectionsMap[collectionName].totalVolume += nft.price;
+
+                collectionsMap[collectionName].ownerCount.add(nft.owner.name);
+
+            });
+
+            
+
+            // Сортируем по объему продаж
+
+            const topCollections = Object.values(collectionsMap)
+
+                .sort((a, b) => b.totalVolume - a.totalVolume)
+
+                .slice(0, 12);
+
+            
+
+            const container = document.getElementById('collections-grid');
+
+            container.innerHTML = topCollections.map(collection => {
+
+                const firstNft = collection.nfts[0];
+
+                return `
+
+                    <div class="bg-[#16161a] rounded-xl overflow-hidden hover:shadow-lg transition-all cursor-pointer" onclick="window.location.href='marketplace.html?collection=${encodeURIComponent(collection.name)}'">
+
+                        <div class="relative">
+
+                            <img src="${firstNft.image}" alt="${collection.name}" class="w-full h-48 object-cover">
+
+                            <div class="absolute -bottom-6 left-4">
+
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold" 
+
+                                     style="background: ${generateColorFromString(collection.name)};">
+
+                                    ${getInitials(collection.name)}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-6 pt-8">
+
+                            <h3 class="font-bold text-lg mb-2">${collection.name}</h3>
+
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-800">
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">NFT</div>
+
+                                    <div class="text-sm font-medium">${collection.nfts.length}</div>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Объем</div>
+
+                                    <div class="text-sm font-medium text-[#2cb67d]">${collection.totalVolume.toFixed(2)} ETH</div>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="text-xs text-gray-400">Владельцы</div>
+
+                                    <div class="text-sm font-medium">${collection.ownerCount.size}</div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join('');
+
+            
+
+            // Обновление счетчика корзины
+
+            if (typeof updateCartBadge !== 'undefined') {
+
+                updateCartBadge();
+
+            } else if (typeof getCartItemCount !== 'undefined') {
+
+                const badge = document.querySelector('.cart-badge');
+
+                if (badge) {
+
+                    const count = getCartItemCount();
+
+                    if (count > 0) {
+
+                        badge.textContent = count;
+
+                        badge.classList.remove('hidden');
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    <script src="components/user-menu.js"></script>
+
+</body>
+
+</html>
+
+
+

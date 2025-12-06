@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Аукционы | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet" href="css/components.css">
+
+</head>
+
+<body>
+
+    <!-- Верхняя полоса -->
+
+    <div class="gradient-bg text-white text-sm py-2 px-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="flex space-x-4">
+
+                <a href="index.html" class="hover:underline">Главная</a>
+
+                <a href="collections.html" class="hover:underline">Топ коллекции</a>
+
+                <a href="auctions.html" class="hover:underline">Аукционы</a>
+
+            </div>
+
+            <div class="flex space-x-4">
+
+                <a href="support.html" class="hover:underline">Поддержка</a>
+
+                <a href="create-nft.html" class="hover:underline">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основное меню -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <a href="index.html" class="flex items-center">
+
+                    <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                    <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                </a>
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <a href="marketplace.html" class="font-medium hover:text-[#7f5af0]">Маркетплейс</a>
+
+                    <a href="statistics.html" class="font-medium hover:text-[#7f5af0]">Статистика</a>
+
+                    <a href="how-to-buy.html" class="font-medium hover:text-[#7f5af0]">Как купить</a>
+
+                    <a href="blog.html" class="font-medium hover:text-[#7f5af0]">Блог</a>
+
+                    <a href="profile.html" class="font-medium hover:text-[#7f5af0]">Профиль</a>
+
+                </nav>
+
+                <div class="flex items-center space-x-4">
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <user-menu></user-menu>
+
+                    <script src="components/user-menu.js"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    
+
+    <!-- Основной контент -->
+
+    <main class="container mx-auto px-4 py-8">
+
+        <div class="flex justify-between items-center mb-8">
+
+            <div>
+
+                <h1 class="text-3xl font-bold mb-2">Аукционы NFT</h1>
+
+                <p class="text-gray-400">Активные аукционы с текущими ставками</p>
+
+            </div>
+
+            <div class="hidden md:flex items-center space-x-4">
+
+                <select id="auction-sort" class="bg-[#242629] text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#7f5af0]">
+
+                    <option value="ending-soon">Заканчиваются скоро</option>
+
+                    <option value="highest-bid">Высшая ставка</option>
+
+                    <option value="newest">Новые</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        
+
+        <div id="auctions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Заполнится динамически -->
+
+        </div>
+
+    </main>
+
+    
+
+    <script src="js/nft-data.js"></script>
+
+    <script src="js/nft-cards.js"></script>
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/notifications.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script>
+
+        function createAuctionCard(nft) {
+
+            const card = document.createElement('div');
+
+            card.className = 'auction-card';
+
+            
+
+            // Вычисляем время до окончания (примерно)
+
+            const hoursLeft = Math.floor(Math.random() * 48) + 1;
+
+            const minutesLeft = Math.floor(Math.random() * 60);
+
+            
+
+            const isInCart = typeof cart !== 'undefined' ? cart.isInCart(nft.id) : false;
+
+            
+
+            card.innerHTML = `
+
+                <a href="nft-detail.html?id=${nft.id}">
+
+                    <div class="auction-nft-image relative">
+
+                        <img src="${nft.image}" alt="${nft.fullName}" class="nft-image">
+
+                        <div class="auction-badge">
+
+                            <i class="fas fa-gavel mr-1"></i> Аукцион
+
+                        </div>
+
+                        <div class="auction-price-overlay">
+
+                            <div class="auction-current-bid">
+
+                                <i class="fas fa-ethereum mr-1"></i> ${nft.currentBid || nft.price} ETH
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <div class="p-5">
+
+                    <a href="nft-detail.html?id=${nft.id}">
+
+                        <h3 class="font-bold text-lg mb-2 hover:text-[#7f5af0] transition-colors">${nft.fullName}</h3>
+
+                    </a>
+
+                    <div class="flex items-center mb-4">
+
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold mr-2" 
+
+                             style="background: ${typeof generateColorFromString !== 'undefined' ? generateColorFromString(nft.creator.name) : '#7f5af0'};">
+
+                            ${typeof getInitials !== 'undefined' ? getInitials(nft.creator.name) : nft.creator.name.charAt(0)}
+
+                        </div>
+
+                        <div>
+
+                            <div class="text-sm font-medium">${nft.creator.name}</div>
+
+                            <div class="text-xs text-gray-400">Создатель</div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="auction-timer">
+
+                        <div class="auction-timer-label">До окончания</div>
+
+                        <div class="auction-timer-value">${hoursLeft}ч ${minutesLeft}м</div>
+
+                    </div>
+
+                    
+
+                    <div class="auction-bid-info">
+
+                        <div>
+
+                            <div class="auction-bid-label">Текущая ставка</div>
+
+                            <div class="auction-bid-value">${nft.currentBid || nft.price} ETH</div>
+
+                        </div>
+
+                        <div class="text-right">
+
+                            <div class="auction-bid-label">Минимальная</div>
+
+                            <div class="text-sm font-medium text-gray-300">${(parseFloat(nft.currentBid || nft.price) * 1.1).toFixed(2)} ETH</div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="flex gap-3 mt-4">
+
+                        <a href="nft-detail.html?id=${nft.id}" class="flex-1 btn-primary text-center">
+
+                            <i class="fas fa-gavel mr-2"></i> Сделать ставку
+
+                        </a>
+
+                        <button class="add-to-cart-btn px-4 ${isInCart ? 'cart-in-cart' : ''}" data-nft-id="${nft.id}">
+
+                            <span class="btn-text">
+
+                                <i class="fas ${isInCart ? 'fa-check' : 'fa-shopping-cart'}"></i>
+
+                            </span>
+
+                            ${isInCart ? '<span class="btn-hover-text"><i class="fas fa-trash"></i></span>' : ''}
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            
+
+            // Обработчик корзины
+
+            const cartBtn = card.querySelector('.add-to-cart-btn');
+
+            if (cartBtn && typeof addToCart !== 'undefined' && typeof removeFromCart !== 'undefined') {
+
+                if (isInCart) {
+
+                    cartBtn.addEventListener('click', (e) => {
+
+                        e.preventDefault();
+
+                        e.stopPropagation();
+
+                        removeFromCart(nft.id);
+
+                        if (typeof showNotification !== 'undefined') {
+
+                            showNotification('Товар удален из корзины', 'success');
+
+                        }
+
+                        if (typeof updateCartBadge !== 'undefined') {
+
+                            updateCartBadge();
+
+                        }
+
+                        // Обновляем кнопку
+
+                        cartBtn.classList.remove('cart-in-cart');
+
+                        cartBtn.innerHTML = '<span class="btn-text"><i class="fas fa-shopping-cart"></i></span>';
+
+                    });
+
+                } else {
+
+                    cartBtn.addEventListener('click', (e) => {
+
+                        e.preventDefault();
+
+                        e.stopPropagation();
+
+                        addToCart(nft.id);
+
+                        if (typeof showNotification !== 'undefined') {
+
+                            showNotification('Товар добавлен в корзину', 'success');
+
+                        }
+
+                        if (typeof updateCartBadge !== 'undefined') {
+
+                            updateCartBadge();
+
+                        }
+
+                        // Обновляем кнопку
+
+                        cartBtn.classList.add('cart-in-cart');
+
+                        cartBtn.innerHTML = '<span class="btn-text"><i class="fas fa-check"></i></span><span class="btn-hover-text"><i class="fas fa-trash"></i></span>';
+
+                    });
+
+                }
+
+            }
+
+            
+
+            return card;
+
+        }
+
+        
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const allNfts = getAllNfts();
+
+            // Фильтруем NFT с текущей ставкой (аукционы) или создаем примерные
+
+            let auctionNfts = allNfts.filter(nft => nft.currentBid && nft.currentBid > 0);
+
+            
+
+            // Если нет аукционов, создаем из первых NFT
+
+            if (auctionNfts.length === 0) {
+
+                auctionNfts = allNfts.slice(0, 9).map(nft => ({
+
+                    ...nft,
+
+                    currentBid: parseFloat(nft.price) * 0.9
+
+                }));
+
+            }
+
+            
+
+            const container = document.getElementById('auctions-grid');
+
+            if (auctionNfts.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="col-span-full empty-state">
+
+                        <div class="empty-state-icon">
+
+                            <i class="fas fa-gavel"></i>
+
+                        </div>
+
+                        <div class="empty-state-title">Активных аукционов пока нет</div>
+
+                        <div class="empty-state-text">Следите за обновлениями, новые аукционы появятся здесь</div>
+
+                        <a href="marketplace.html" class="btn-primary inline-block">
+
+                            Перейти в маркетплейс
+
+                        </a>
+
+                    </div>
+
+                `;
+
+            } else {
+
+                container.innerHTML = '';
+
+                auctionNfts.forEach(nft => {
+
+                    container.appendChild(createAuctionCard(nft));
+
+                });
+
+            }
+
+            
+
+            // Сортировка
+
+            const sortSelect = document.getElementById('auction-sort');
+
+            if (sortSelect) {
+
+                sortSelect.addEventListener('change', (e) => {
+
+                    const sorted = [...auctionNfts];
+
+                    switch(e.target.value) {
+
+                        case 'ending-soon':
+
+                            // Случайная сортировка для примера
+
+                            sorted.sort(() => Math.random() - 0.5);
+
+                            break;
+
+                        case 'highest-bid':
+
+                            sorted.sort((a, b) => (b.currentBid || b.price) - (a.currentBid || a.price));
+
+                            break;
+
+                        case 'newest':
+
+                            sorted.reverse();
+
+                            break;
+
+                    }
+
+                    container.innerHTML = '';
+
+                    sorted.forEach(nft => {
+
+                        container.appendChild(createAuctionCard(nft));
+
+                    });
+
+                });
+
+            }
+
+            
+
+            // Обновление счетчика корзины
+
+            if (typeof updateCartBadge !== 'undefined') {
+
+                updateCartBadge();
+
+            } else if (typeof getCartItemCount !== 'undefined') {
+
+                const badge = document.querySelector('.cart-badge');
+
+                if (badge) {
+
+                    const count = getCartItemCount();
+
+                    if (count > 0) {
+
+                        badge.textContent = count;
+
+                        badge.classList.remove('hidden');
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    <script src="components/user-menu.js"></script>
+
+</body>
+
+</html>
+

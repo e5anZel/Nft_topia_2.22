@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Политика конфиденциальности | NFTopia Galaxy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #0f0e17;
+
+            color: #fffffe;
+
+        }
+
+        .gradient-bg {
+
+            background: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Верхняя полоса -->
+
+    <div class="gradient-bg text-white text-sm py-2 px-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="flex space-x-4">
+
+                <a href="index.html" class="hover:underline">Главная</a>
+
+                <a href="collections.html" class="hover:underline">Топ коллекции</a>
+
+                <a href="auctions.html" class="hover:underline">Аукционы</a>
+
+            </div>
+
+            <div class="flex space-x-4">
+
+                <a href="support.html" class="hover:underline">Поддержка</a>
+
+                <a href="create-nft.html" class="hover:underline">Создать NFT</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- Основное меню -->
+
+    <header class="bg-[#16161a] shadow-sm sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-3">
+
+            <div class="flex justify-between items-center">
+
+                <a href="index.html" class="flex items-center">
+
+                    <i class="fas fa-cubes text-2xl text-[#7f5af0] mr-2"></i>
+
+                    <span class="text-xl font-bold">NFTopia Galaxy</span>
+
+                </a>
+
+                <nav class="hidden md:flex space-x-6">
+
+                    <a href="marketplace.html" class="font-medium hover:text-[#7f5af0]">Маркетплейс</a>
+
+                    <a href="statistics.html" class="font-medium hover:text-[#7f5af0]">Статистика</a>
+
+                    <a href="how-to-buy.html" class="font-medium hover:text-[#7f5af0]">Как купить</a>
+
+                    <a href="blog.html" class="font-medium hover:text-[#7f5af0]">Блог</a>
+
+                    <a href="profile.html" class="font-medium hover:text-[#7f5af0]">Профиль</a>
+
+                </nav>
+
+                <div class="flex items-center space-x-4">
+
+                    <a href="cart.html" class="relative text-gray-300 hover:text-[#7f5af0]">
+
+                        <i class="fas fa-shopping-cart text-xl"></i>
+
+                        <span class="cart-badge absolute -top-2 -right-2 bg-[#7f5af0] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+
+                    </a>
+
+                    <user-menu></user-menu>
+
+                    <script src="components/user-menu.js"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    
+
+    <!-- Основной контент -->
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+
+        <h1 class="text-3xl font-bold mb-8">Политика конфиденциальности</h1>
+
+        
+
+        <div class="bg-[#16161a] rounded-xl p-8 space-y-6 text-gray-400">
+
+            <section>
+
+                <h2 class="text-xl font-bold text-white mb-3">1. Сбор информации</h2>
+
+                <p>Мы собираем информацию, которую вы предоставляете при регистрации и использовании платформы.</p>
+
+            </section>
+
+            
+
+            <section>
+
+                <h2 class="text-xl font-bold text-white mb-3">2. Использование информации</h2>
+
+                <p>Ваша информация используется для предоставления услуг платформы и улучшения пользовательского опыта.</p>
+
+            </section>
+
+            
+
+            <section>
+
+                <h2 class="text-xl font-bold text-white mb-3">3. Защита данных</h2>
+
+                <p>Мы принимаем меры для защиты ваших персональных данных от несанкционированного доступа.</p>
+
+            </section>
+
+            
+
+            <section>
+
+                <h2 class="text-xl font-bold text-white mb-3">4. Cookies</h2>
+
+                <p>Мы используем cookies для улучшения работы сайта и персонализации контента.</p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    
+
+    <script src="js/user-data.js"></script>
+
+    <script src="js/avatar-utils.js"></script>
+
+    <script src="js/cart.js"></script>
+
+    <script src="js/auth-ui.js"></script>
+
+    <script>
+
+        if (typeof updateCartBadge !== 'undefined') {
+
+            updateCartBadge();
+
+        }
+
+    </script>
+
+    <script src="components/user-menu.js"></script>
+
+</body>
+
+</html>
+
+
+

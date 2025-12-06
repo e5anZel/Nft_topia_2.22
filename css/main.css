@@ -1,0 +1,406 @@
+/* Основные стили проекта NFTopia Galaxy */
+
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Глобальные переменные */
+:root {
+    --bg-primary: #0f0e17;
+    --bg-secondary: #16161a;
+    --bg-tertiary: #242629;
+    --text-primary: #fffffe;
+    --text-secondary: #a7a9be;
+    --text-tertiary: #94a1b2;
+    --accent-primary: #7f5af0;
+    --accent-secondary: #2cb67d;
+    --border-color: #2a2b32;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Градиентный фон */
+.gradient-bg {
+    background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+}
+
+/* Карточки NFT */
+.nft-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.nft-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(127, 90, 240, 0.3);
+}
+
+.nft-image,
+.nft-card-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Изображение на странице детального просмотра NFT */
+.nft-image-container {
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.nft-image-container .nft-image {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    display: block;
+    background-color: var(--bg-tertiary);
+}
+
+/* Аватары */
+.creator-avatar,
+.owner-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-primary);
+    object-fit: cover;
+}
+
+/* Теги цены */
+.price-tag {
+    background-color: var(--accent-primary);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Фильтры */
+.filter-chip {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+}
+
+.filter-chip:hover {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+.filter-chip.active {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+/* Кнопки */
+.btn-primary {
+    background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(127, 90, 240, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 2px solid var(--accent-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* Поля ввода */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(127, 90, 240, 0.1);
+}
+
+/* Ползунок цены */
+.price-range-container {
+    position: relative;
+    height: 8px;
+    background-color: var(--bg-tertiary);
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.price-range-track {
+    position: absolute;
+    height: 8px;
+    background-color: var(--accent-primary);
+    border-radius: 4px;
+    top: 0;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--bg-secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(127, 90, 240, 0.5);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--bg-secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(127, 90, 240, 0.5);
+}
+
+/* Поля ввода цены */
+.price-input-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.price-input-wrapper {
+    flex: 1;
+}
+
+.price-input-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.price-input {
+    width: 100%;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.price-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(127, 90, 240, 0.1);
+}
+
+.price-input:invalid {
+    border-color: #ef4444;
+}
+
+/* Контейнеры информации */
+.info-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Иконки свойств NFT */
+.property-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-tertiary);
+    border-radius: 12px;
+    font-size: 20px;
+    color: var(--accent-primary);
+    margin-bottom: 8px;
+}
+
+.property-card {
+    background-color: var(--bg-tertiary);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.property-card:hover {
+    background-color: var(--bg-secondary);
+    transform: translateY(-2px);
+}
+
+/* История */
+.history-item {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Кнопка добавления в корзину */
+.add-to-cart-btn,
+.btn-add-to-cart {
+    width: 100%;
+    background-color: var(--bg-tertiary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 2px solid var(--accent-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.add-to-cart-btn:hover,
+.btn-add-to-cart:hover {
+    background-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.add-to-cart-btn:disabled,
+.btn-add-to-cart:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.add-to-cart-btn.remove-hover {
+    background-color: #ef4444;
+    border-color: #ef4444;
+}
+
+.add-to-cart-btn.remove-hover:hover {
+    background-color: #dc2626;
+}
+
+/* Навигация */
+.navbar {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+/* Футер */
+footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .nft-image,
+    .nft-card-image {
+        height: 200px;
+    }
+    
+    /* Адаптивность для страницы детального просмотра */
+    .nft-image-container .nft-image {
+        max-height: 400px;
+    }
+    
+    .price-input-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
